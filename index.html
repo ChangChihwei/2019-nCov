@@ -394,7 +394,9 @@
       ev.defaultPrevented = false;
       var opt = document.getElementById('download_period');
       var value = opt.options[opt.selectedIndex].value;
-      downloadKml(value,);
+      downloadKml(value,function(){
+        selectTab("step3");
+      });
       return false;
     }
 
