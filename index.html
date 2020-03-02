@@ -360,7 +360,7 @@
       ev.preventDefault();
     }
 
-    function downloadKml(period) {
+    function downloadKml(period, next) {
       var begin, end;
       if (period.startsWith('-')) {
         // last N seconds
@@ -381,7 +381,10 @@
         let mday = date.getDate();
         let download_url = "https://www.google.com/maps/timeline/kml?authuser=0&pb=!1m8!1m3!1i" + year + "!2i" + month + "!3i" + mday +
           "!2m3!1i" + year + "!2i" + month + "!3i" + mday;
-        window.open(download_url, "_blank");
+        var downloadWindow = window.open(download_url, "_blank");
+        downloadWindow.onbeforeload = function(ev){
+          if((typeof next)=="function") next();
+        }
       }
     }
 
@@ -391,7 +394,7 @@
       ev.defaultPrevented = false;
       var opt = document.getElementById('download_period');
       var value = opt.options[opt.selectedIndex].value;
-      downloadKml(value);
+      downloadKml(value,);
       return false;
     }
 
