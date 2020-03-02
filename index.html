@@ -382,7 +382,7 @@
         let download_url = "https://www.google.com/maps/timeline/kml?authuser=0&pb=!1m8!1m3!1i" + year + "!2i" + month + "!3i" + mday +
           "!2m3!1i" + year + "!2i" + month + "!3i" + mday;
         var downloadWindow = window.open(download_url, "_blank"); // null while being blocked by browser.
-        downloadWindow && downloadWindow.onbeforeunload = function(ev){
+        if(downloadWindow) downloadWindow.onbeforeunload = function(ev){
           if((typeof next)=="function") next();
         }
       }
